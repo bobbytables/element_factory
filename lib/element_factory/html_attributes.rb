@@ -26,7 +26,7 @@ module ElementFactory
 
     def to_s
       attributes = self.attributes.dup
-      attributes.merge! data_attributes
+      attributes.update data_attributes
       attributes.update boolean_attributes
       attributes.delete(:data)
 
