@@ -35,5 +35,10 @@ describe ElementFactory::HtmlAttributes  do
 
       expect(subject.to_s).to eq(%(class="a-class" data-key="val" disabled="disabled"))
     end
+
+    it "escapes attribute values" do
+      attributes[:class] = "<lawl> \""
+      expect(subject.to_s).to eq(%(class="&lt;lawl&gt; &quot;"))
+    end
   end
 end

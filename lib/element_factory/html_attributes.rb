@@ -29,13 +29,13 @@ module ElementFactory
         .merge(data_attributes)
         .merge(boolean_attributes)
         .stringify_keys
-        
+
       attributes.delete("data")
 
       attributes.keys.sort.map do |attribute|
-        value = attributes[attribute]
+        value = ERB::Util.html_escape(attributes[attribute])
         %(#{attribute}="#{value}")
-      end.join(" ")
+      end.join(" ").html_safe
     end
   end
 end
