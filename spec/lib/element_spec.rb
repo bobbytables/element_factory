@@ -49,11 +49,11 @@ describe ElementFactory::Element do
     before do
       ElementFactory::HtmlAttributes.
         should_receive(:new).
-        and_return(double("attributes", to_s: "attributes!"))
+        and_return(attributes)
     end
 
     specify "are delegated" do
-      expect(subject.html_attributes).to eq("attributes!")
+      expect(subject.html_attributes).to be attributes
     end
   end
 
