@@ -14,6 +14,7 @@ module ElementFactory
     def to_html
       tag_start + tag_middle + tag_end
     end
+    alias to_s to_html
 
     def html_attributes
       HtmlAttributes.new(self.attributes.dup).to_s
@@ -23,6 +24,10 @@ module ElementFactory
       children << child
     end
     alias << add_child
+
+    def add_children(children)
+      children.each {|child| add_child(child) }
+    end
 
     def children
       @children ||= []

@@ -89,10 +89,20 @@ describe ElementFactory::Element do
     end
   end
 
-  context ".add_child" do
+  context "children" do
     let(:child) { described_class.new(:tr) }
-    it "adds a child element to the list" do
-      expect { subject.add_child(child) }.to change(subject.children, :size).by(1)
+    let(:children) { [described_class.new(:td),described_class.new(:td)] }
+
+    context ".add_child" do
+      it "adds a child element to the list" do
+        expect { subject.add_child(child) }.to change(subject.children, :size).by(1)
+      end
+    end
+
+    context ".add_children" do
+      it "adds multiple chilren" do
+        expect { subject.add_children(children) }.to change(subject.children, :size).by(2)
+      end
     end
   end
 end
