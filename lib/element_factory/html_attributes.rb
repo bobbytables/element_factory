@@ -25,12 +25,12 @@ module ElementFactory
     end
 
     def to_s
-      attributes = self.attributes.dup
-      attributes.update data_attributes
-      attributes.update boolean_attributes
-      attributes.delete(:data)
-
-      attributes.stringify_keys!
+      attributes = self.attributes
+        .merge(data_attributes)
+        .merge(boolean_attributes)
+        .stringify_keys
+        
+      attributes.delete("data")
 
       attributes.keys.sort.map do |attribute|
         value = attributes[attribute]
