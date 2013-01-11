@@ -1,5 +1,3 @@
-require "erb"
-
 module ElementFactory
   module Elements
     class TextElement
