@@ -17,7 +17,7 @@ module ElementFactory
     alias to_s to_html
 
     def html_attributes
-      HtmlAttributes.new(self.attributes.dup).to_s
+      HtmlAttributes.new(self.attributes.dup)
     end
 
     def add_child(child)
