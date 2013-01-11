@@ -16,6 +16,16 @@ describe ElementFactory::Element do
       expect(tag.attributes).to have_key :class
       expect(tag.attributes[:class]).to eq("something")
     end
+
+    specify "with a string" do
+      tag = subject.new(:span, "Some text")
+      expect(tag.attributes[:text]).to eq("Some text")
+    end
+
+    specify "with a string adds a child" do
+      tag = subject.new(:span, "Some text")
+      expect(tag).to have(1).children
+    end
   end
 
   context "tag pieces" do
@@ -36,14 +46,14 @@ describe ElementFactory::Element do
   context ".html_attributes" do
     let(:attributes) { Hash.new }
     subject { described_class.new(:table) }
-
     before do
-      subject.stub(:attributes).and_return(attributes)
+      ElementFactory::HtmlAttributes.
+        should_receive(:new).
+        and_return(double("attributes", to_s: "attributes!"))
     end
 
-    it "returns an attributes in markup form" do
-      attributes[:class] = "a-class"
-      expect(subject.html_attributes).to eq("class=\"a-class\"")
+    specify "are delegated" do
+      expect(subject.html_attributes).to eq("attributes!")
     end
   end
 
@@ -66,6 +76,15 @@ describe ElementFactory::Element do
       it "recusively renders all children of the node" do
         element = to_element(subject.to_html, "table")
         expect(element.at_css("tr")).to be_present
+      end
+    end
+
+    context "with string children" do
+      subject { described_class.new(:span, "Text") }
+
+      it "includes a string node" do
+        element = to_element(subject.to_html, "span")
+        expect(element.text).to eq("Text")
       end
     end
   end

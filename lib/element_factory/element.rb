@@ -1,10 +1,14 @@
-module TableCloth
+module ElementFactory
   class Element
     attr_accessor :name, :attributes
 
-    def initialize(name, attributes={})
+    def initialize(name, attributes_or_string=nil)
       @name = name.to_s
-      @attributes = attributes
+      @attributes = coerce_attributes(attributes_or_string)
+
+      if attributes[:text].present? && attributes[:text].is_a?(String)
+        add_child Elements::TextElement.new(attributes[:text])
+      end
     end
 
     def to_html
@@ -12,9 +16,7 @@ module TableCloth
     end
 
     def html_attributes
-      attributes.map do |attribute, value|
-        "#{attribute}=\"#{value}\""
-      end.join(" ")
+      HtmlAttributes.new(self.attributes.dup).to_s
     end
 
     def add_child(child)
@@ -37,6 +39,19 @@ module TableCloth
 
     def tag_middle
       children.map(&:to_html).join
+    end
+
+    private
+
+    def coerce_attributes(attributes)
+      case attributes
+      when String
+        {text: attributes}
+      when Hash
+        attributes
+      else
+        {}
+      end
     end
   end
 end
