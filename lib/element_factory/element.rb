@@ -6,7 +6,7 @@ module ElementFactory
       @name = name.to_s
       @attributes = coerce_attributes(attributes_or_string)
 
-      if attributes[:text].present? && attributes[:text].is_a?(String)
+      if attributes[:text].is_a?(String)
         add_child Elements::TextElement.new(attributes[:text])
       end
     end
