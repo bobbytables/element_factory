@@ -31,12 +31,6 @@ describe ElementFactory::Element do
         expect(subject.tag_start).to eq("<table class=\"something\">")
       end
     end
-
-    context ".tag_middle" do
-      it "returns an empty string with no children" do
-        expect(subject.tag_middle).to eq("")
-      end
-    end
   end
 
   context ".html_attributes" do

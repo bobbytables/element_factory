@@ -1,4 +1,4 @@
-module ElementFactory
+module TableCloth
   class Element
     attr_accessor :name, :attributes
 
