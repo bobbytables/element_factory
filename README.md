@@ -1,6 +1,6 @@
-# ElementFactory
+# Element Factory
 
-TODO: Write a gem description
+Element Factory is a more object oriented approach to generating markup in Ruby. No DSL to learn, just objects.
 
 ## Installation
 

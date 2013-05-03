@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = ElementFactory::VERSION
   gem.authors       = ["Robert Ross"]
   gem.email         = ["robert@creativequeries.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Element Factory is a more object oriented approach to generating markup.}
+  gem.summary       = %q{Element Factory isn't a fancy DSL, it's Ruby, it's friendly, it's neat.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
