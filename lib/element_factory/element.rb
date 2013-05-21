@@ -35,15 +35,15 @@ module ElementFactory
 
     def tag_start
       tag_attributes = attributes.any?? " #{html_attributes}" : ""
-      %|<%s%s>| % [name, tag_attributes]
+      (%|<%s%s>| % [name, tag_attributes]).html_safe
     end
 
     def tag_end
-      %|</%s>| % name
+      (%|</%s>| % name).html_safe
     end
 
     def tag_middle
-      children.map(&:to_html).join
+      (children.map(&:to_html).join).html_safe
     end
 
     private

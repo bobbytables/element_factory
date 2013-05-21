@@ -64,6 +64,10 @@ describe ElementFactory::Element do
       expect(subject.to_html).to match /<table(.*)>(.*)<\/table>/
     end
 
+    it "returns an html safe string" do
+      expect(subject.to_html).to be_html_safe
+    end
+
     it "returns the tag with attributes" do
       element = to_element(subject.to_html, "table")
       expect(element[:class]).to eq("a-class")
