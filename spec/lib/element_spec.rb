@@ -19,12 +19,17 @@ describe ElementFactory::Element do
 
     specify "with a string" do
       tag = subject.new(:span, "Some text")
-      expect(tag.attributes[:text]).to eq("Some text")
+      expect(tag.children.first).to be_kind_of ElementFactory::Elements::TextElement
     end
 
     specify "with a string adds a child" do
       tag = subject.new(:span, "Some text")
       expect(tag).to have(1).children
+    end
+
+    it "accepts inner html" do
+      tag = subject.new(:span, inner_html: "<p>I'm inside and safe!</p>".html_safe)
+      expect(tag).to have_tag "p"
     end
   end
 
@@ -89,6 +94,14 @@ describe ElementFactory::Element do
       it "includes a string node" do
         element = to_element(subject.to_html, "span")
         expect(element.text).to eq("Text")
+      end
+    end
+
+    context "omitting attributes" do
+      subject { described_class.new(:span, inner_html: "<p>Whut</p>") }
+
+      it "does not include an inner_html attribute" do
+        expect(subject).to_not have_xpath "//span[@inner_html]"
       end
     end
   end

@@ -10,5 +10,6 @@ module ElementFactory
 
   module Elements
     autoload :TextElement, "element_factory/elements/text_element"
+    autoload :InnerHtmlElement, "element_factory/elements/inner_html_element"
   end
 end

@@ -2,12 +2,17 @@ module ElementFactory
   class Element
     attr_accessor :name, :attributes
 
+    CONTENT_ATTRIBUTES = {text: Elements::TextElement, inner_html: Elements::InnerHtmlElement}
+
     def initialize(name, attributes_or_string=nil)
       @name = name.to_s
       @attributes = coerce_attributes(attributes_or_string)
 
-      if attributes[:text].is_a?(String)
-        add_child Elements::TextElement.new(attributes[:text])
+      CONTENT_ATTRIBUTES.each do |attribute, klass|
+        if value = attributes[attribute]
+          add_child klass.new(value)
+          attributes.delete(attribute)
+        end
       end
     end
 
@@ -50,10 +55,8 @@ module ElementFactory
 
     def coerce_attributes(attributes)
       case attributes
-      when String
-        {text: attributes}
-      when Hash
-        attributes
+      when String then {text: attributes}
+      when Hash then attributes
       else
         {}
       end
