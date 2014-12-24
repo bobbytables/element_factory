@@ -17,7 +17,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_development_dependency('rspec', '~> 2.11')
+  gem.add_development_dependency('rspec', '~> 2.99.0')
+  gem.add_development_dependency('rspec-collection_matchers')
   gem.add_development_dependency('simplecov')
   gem.add_development_dependency('awesome_print')
   gem.add_development_dependency('nokogiri')
@@ -26,5 +27,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('rake')
   gem.add_development_dependency('rb-fsevent', '~> 0.9.4')
 
-  gem.add_dependency('activesupport', '>= 3.1', '< 4.2')
+  gem.add_dependency('activesupport', '>= 3.1', '< 5.0')
 end
