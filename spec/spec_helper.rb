@@ -5,6 +5,7 @@ require "awesome_print"
 require "nokogiri"
 require "pry"
 require "active_support/core_ext/class"
+require "rspec/collection_matchers"
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
